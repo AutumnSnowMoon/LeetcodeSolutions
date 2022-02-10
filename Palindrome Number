@@ -1,0 +1,22 @@
+#let the reverse number and compare their value.
+
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if (x<0) return false;
+        else {
+            int xx=x;
+            long long y=0;
+            
+            while(xx>0){
+                y*=10;
+                y+=(xx%10);
+                xx/=10;
+            }
+            
+            if (y==x) return true;
+            else return false;            
+        }
+
+    }
+};
