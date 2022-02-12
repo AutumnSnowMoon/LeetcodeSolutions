@@ -1,0 +1,35 @@
+int val(char s)//convert the Roman letter to value
+{
+    int val = 0;
+    switch (s)
+    {
+    case 'I': val = 1; break;
+    case 'V': val = 5; break;
+    case 'X': val = 10; break;
+    case 'L': val = 50; break;
+    case 'C': val = 100; break;
+    case 'D': val = 500; break;
+    case 'M': val = 1000; break;
+    }
+    return val;
+}
+
+class Solution {
+public:
+    int romanToInt(string s) {
+    int len = s.size();
+    int sum = 0;
+    for (int i = 0; i < len; i++)
+    {
+        if (val(s[i]) >= val(s[i + 1]))	//if >=, then add
+        {
+            sum += val(s[i]);
+        }
+        else							//if <=, then minus
+        {
+            sum -= val(s[i]);	
+        }
+    }
+    return sum;
+    }
+};
