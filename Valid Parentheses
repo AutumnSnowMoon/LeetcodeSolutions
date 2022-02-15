@@ -1,0 +1,41 @@
+//use the stack to compare the match
+
+int match(char a, char b){
+    if ((a=='(' && b==')') || (a=='{'&&b=='}') || (a=='['&& b==']'))
+        return true;
+    else return false;
+}
+
+class Solution {
+public:
+    bool isValid(string s) {
+        
+        int len=s.length();
+        
+        
+        if(len==0) return true;   
+        else if (len%2==1) return false;
+        else{
+          
+          stack <char> stk;
+          
+          for (int i=0; i<len;i++){
+              if (stk.empty()) stk.push(s[i]);
+              else{
+                  char top=stk.top();
+                  if (match(top,s[i])){
+                     stk.pop();
+                   }
+                  else stk.push(s[i]);
+              
+              }
+              
+          }
+          
+          if(stk.empty()) return true;
+          else return false;
+            
+        }
+        
+    }
+};
