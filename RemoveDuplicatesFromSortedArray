@@ -1,0 +1,16 @@
+#the unique will judge if the element equals the front one and then move the repeat elements to end, 
+#so you must sort the vector before use this, and will return the 迭代器 of first repeat element, then we can use erase
+
+
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int len1=nums.size();
+        nums.erase(unique(nums.begin(), nums.end()), nums.end());
+        int len2=nums.size();
+        for(int i=0;i<(len2-len1);i++)
+            nums.push_back('_');
+        
+        return len2;
+    }
+};
