@@ -1,0 +1,21 @@
+#learn function substr and string compare
+
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        if(needle=="") return 0;
+        
+        if(haystack=="") return -1;
+        else{
+            int len1=needle.length(),len2=haystack.length(),ans=-1;
+            for (int i=0;i<len2-len1+1;i++){
+                if(haystack[i]==needle[0]){
+                    string cmp=haystack.substr(i,len1);
+                    if(cmp.compare(needle)==0) {ans=i;break;}
+                }
+            }
+            return ans;
+        }
+        
+    }
+};
