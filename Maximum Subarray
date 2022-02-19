@@ -1,0 +1,19 @@
+#dp, note that we must record the Max value which is ended with nums[i] at the same time(with array Max_sum[i])
+
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int len=nums.size();
+        int Max_sum[len+1],dp[len+1];
+        
+        dp[0]=nums[0];
+        Max_sum[0]=nums[0];
+        
+        for (int i=1;i<len;i++){
+            Max_sum[i]=max(Max_sum[i-1]+nums[i],nums[i]);
+            dp[i]=max(dp[i-1],Max_sum[i]);
+        }
+        return dp[len-1];
+    }
+};
