@@ -1,0 +1,34 @@
+// do the addition just by char or transfer to int 
+
+class Solution {
+public:
+    string addBinary(string a, string b) {
+      int lena=a.size();
+      int lenb=b.size();
+      
+      int maxx=max(lena,lenb);
+      int an[maxx+1];
+      int bn[maxx+1];
+      
+      for (int i=1;i<=lena;i++) an[maxx+1-i]=a[lena-i]-'0';
+      for (int i=lena+1;i<=(maxx+1);i++) an[maxx+1-i]=0;
+        
+      for (int i=1;i<=lenb;i++) bn[maxx+1-i]=b[lenb-i]-'0';
+      for (int i=lenb+1;i<=(maxx+1);i++) bn[maxx+1-i]=0;
+         
+      int c=0;
+      int ans[maxx+1];
+      for (int i=maxx;i>0;i--){
+          ans[i]=(an[i]+bn[i]+c)%2;
+          c=(an[i]+bn[i]+c)/2;
+      }
+      ans[0]=c;
+     
+     string ret="";
+     if(ans[0])
+         for(int i=0;i<maxx+1;i++) ret+=(ans[i]+'0');
+     else     
+         for(int i=1;i<maxx+1;i++) ret+=(ans[i]+'0');
+     return ret;   
+    }
+};
