@@ -1,0 +1,35 @@
+//binary search
+
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        
+        if (m==0) nums1=nums2;
+        else{
+            
+        nums1.assign(nums1.begin(),nums1.begin()+m);
+    
+        int tmp=0;
+        for(int i=0;i<n;i++){
+            int left=tmp;
+            int right=m+i-1;
+            while(left<=right){
+                int mid=(left+right)/2;
+                if(nums1[mid]<nums2[i]) left=mid+1;
+                else if(nums1[mid]>nums2[i]) right=mid-1;
+                else {
+                    nums1.insert(nums1.begin()+mid,nums2[i]);
+                    tmp=mid;
+                    break;
+                }
+            }
+            
+            if(left>right){
+                nums1.insert(nums1.begin()+left,nums2[i]);
+                tmp=right;
+            }
+        
+        }
+        }
+    }
+};
