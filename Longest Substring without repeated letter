@@ -1,0 +1,25 @@
+//run over all the poasisble case, O(n^2) time 
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int ans=1;
+        if (s.size()<2) ans=s.size();
+        else{
+            int start=0;
+            int end=1;
+            for(int i=end;i<s.size();i++){
+                for(int j=start;j<end;j++){
+                    if(s[j]==s[i]){
+                        start=j+1;
+                        break;
+                    }
+                }
+                end++;
+                if((end-start)>ans) ans = end-start;
+                
+            }
+        }
+        return ans;
+    }
+};
