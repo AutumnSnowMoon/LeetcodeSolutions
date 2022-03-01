@@ -1,0 +1,27 @@
+// consider the module relationship of each row
+
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        if(s.size()<=numRows) return s;
+        else if (numRows==1) return s;
+        else {
+            
+            int len =s.size();
+            string ans=s;
+            int cnt=0;
+            for(int i=1;i<=numRows;i++){
+                for(int j=1;j<=len;j++){
+                    if (j%(2*numRows-2)==i || j%(2*numRows-2)==((2*numRows-i)%(2*numRows-2))){
+                        ans[cnt]=s[j-1];
+                        cnt++;
+                    }
+                
+                }
+            }
+           
+            return ans;
+        }
+        
+    }
+};
