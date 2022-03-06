@@ -1,0 +1,60 @@
+//just think about differenet special cases
+
+class Solution {
+public:
+    int myAtoi(string s) {
+        int len=s.size();
+        char tmp[201];
+        int cnt=0;
+        int flag=1;
+        int flag2=0;
+        for(int i=0;i<len;i++){
+            if(((s[i]>='a'&& s[i]<='z')||(s[i]>='A'&& s[i]<='Z'))&&cnt==0){
+                flag=0;
+                break;
+            }
+            if (s[i]=='-' || s[i]=='+' || (s[i]>='0' && s[i]<='9')){
+                if((s[i]=='-'&& flag2)||(s[i]=='+'&&flag2))
+                    break;
+                tmp[cnt]=s[i];
+                cnt++;       
+                flag2=1;
+            }
+   if (s[i]=='.'||(s[i]>='a'&&s[i]<='z')||(s[i]>='A'&&s[i]<='Z')|| (s[i]==' '&&flag2)){
+        break;
+    }
+        } 
+    if (flag==0) return 0;
+    else{
+        
+    if(cnt==1 && (tmp[0]=='+'||tmp[0]=='-')) return 0;
+    else{
+    long long ans = 0;
+    if (tmp[0]=='-'){
+       for(int i=1;i<cnt;i++){
+           if(tmp[i]=='+' || tmp[i]=='-'||tmp[i]==' ') {ans=0;break;}
+           ans=(ans*10)+(tmp[i]-'0');
+           ans=(ans<=(1LL<<31))?ans:1LL<<31;
+       }
+        ans*=(-1);
+    }
+    else if(tmp[0]=='+'){
+        for(int i=1;i<cnt;i++){
+            if(tmp[i]=='+' || tmp[i]=='-'||tmp[i]==' ') {;cout<<"hhh";ans=0;break;}
+           ans=(ans*10)+(tmp[i]-'0');
+           ans=(ans<=((1LL<<31)-1))?ans:(1LL<<31)-1;
+        }
+    }
+    else{
+        for(int i=0;i<cnt;i++){
+            if(tmp[i]=='+' || tmp[i]=='-'||tmp[i]==' ') {ans=0;break;}
+          ans=(ans*10)+(tmp[i]-'0');
+          ans=(ans<=((1LL<<31)-1))?ans:(1LL<<31)-1;
+        }
+    }
+    
+    return ans;
+    }
+     }
+    }
+};
