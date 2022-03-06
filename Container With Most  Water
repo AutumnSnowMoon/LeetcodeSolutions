@@ -1,0 +1,23 @@
+//we one run over the array, if head height > end height, we drop the end height
+
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int ans=0;
+        int head=0;
+        int end=height.size()-1;
+        while(head!=end){
+            int tmp;
+            if(height[head]>=height[end]){
+                tmp=(end-head)*height[end];
+                end--;
+            }
+            else{
+                tmp=(end-head)*height[head];
+                head++;
+            }
+            if(tmp>=ans) ans=tmp;
+        }
+    return ans;
+    }
+};
