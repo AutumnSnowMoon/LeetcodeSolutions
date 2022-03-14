@@ -1,0 +1,57 @@
+class Solution {
+public:
+    char vi[10][4];
+      vector<string > out;
+      int length;
+      void getVi()
+      {
+          int i,j;
+          for(i=0;i<=9;i++)
+             for(j=0;j<4;j++)
+                 vi[i][j]=0;
+         for(i=2;i<=7;i++)
+         {
+             for(j=0;j<3;j++)
+             {
+                 vi[i][j]= 'a'+ 3*(i-2)+j;
+             }
+         }
+         vi[0][0]=' ';
+         vi[7][3]='s';
+         for(i=8;i<=9;i++)
+         {
+             for(j=0;j<3;j++)
+             {
+                 vi[i][j]= 'b' + 3*(i-2)+j;
+             }
+         }
+         vi[9][3]='z';
+     }
+     
+     void DFS(int len,string digits, string c)
+     {
+         if(len==length)
+                      {
+             out.push_back(c);
+             return ;
+         }
+         int count = digits[len]-'0';
+         for(int i=0;i<4;i++)
+         {
+            if(vi[count][i]!=0)
+                DFS(len+1,digits,c+vi[count][i]);
+         }
+     }
+     vector<string> letterCombinations(string digits) {
+         out.clear();
+         length = digits.size();
+         if(length==0) 
+         {
+             return out;
+         }
+         if(digits.find('1')!=string::npos) return out;
+         getVi();
+         DFS(0,digits,"");
+         return out;
+     }
+ };
