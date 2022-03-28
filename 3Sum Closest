@@ -1,0 +1,83 @@
+//fixed one number, and then scan from two side
+
+class Solution {
+public:
+    int threeSumClosest(vector<int>& nums, int target) {
+        sort(nums.begin(),nums.end());
+        int ans=1e5;
+        int sum=0;
+        int length=nums.size();
+        
+        for (int i=0;i<length;i++){
+            vector<int> tmp={};
+            for (int j=0; j<length;j++){
+                if(j==i) continue;
+                else tmp.push_back(nums[j]);
+            }
+            
+            int target_two=target-nums[i];
+        
+            int left=0;
+            int right=length-2;
+            
+            int flag=0;
+            while(left<right){
+                if((tmp[left]+tmp[right])<target_two) {
+                    left++; 
+                    if(left==right) flag=1;
+                }
+                else if((tmp[left]+tmp[right])>target_two) {
+                    right--;
+                    if(left==right) flag=2;
+                }
+                else break;
+            }
+            
+          
+          int diff;
+          if(flag==0) {
+              diff=target_two-tmp[left]-tmp[right];
+              if(abs(diff)<=ans) {ans=abs(diff);sum=nums[i]+tmp[left]+tmp[right];}
+          }
+          else if(flag==1) {
+              left--;
+              if(right==(length-2)) {
+                  diff=target_two-tmp[left]-tmp[right];
+                  if(abs(diff)<=ans) {ans=abs(diff);sum=nums[i]+tmp[left]+tmp[right];}
+              }
+                  
+              else{
+                  if (tmp[left]+tmp[right+1]-target_two>target_two-tmp[left]-tmp[right]){
+                      diff=target_two-tmp[left]-tmp[right];
+                      if(abs(diff)<=ans) {ans=abs(diff);sum=nums[i]+tmp[left]+tmp[right];}
+                  }      
+                  else {
+                      diff=target_two-tmp[left]-tmp[right+1];
+                      if(abs(diff)<=ans) {ans=abs(diff);sum=nums[i]+tmp[left]+tmp[right+1];}
+                  }
+              }
+          }
+          else {
+              right++;
+              if(left==0) {
+                  diff=target_two-tmp[left]-tmp[right];
+                  if(abs(diff)<=ans) {ans=abs(diff);sum=nums[i]+tmp[left]+tmp[right];}
+              }
+                  
+              else{
+                  if (tmp[left]+tmp[right]-target_two<target_two-tmp[left-1]-tmp[right]){
+                      diff=target_two-tmp[left]-tmp[right];
+                      if(abs(diff)<=ans) {ans=abs(diff);sum=nums[i]+tmp[left]+tmp[right];}
+                  }      
+                  else {
+                      diff=target_two-tmp[left-1]-tmp[right];
+                      if(abs(diff)<=ans) {ans=abs(diff);sum=nums[i]+tmp[left-1]+tmp[right];}
+                  }
+              }
+              
+          }
+        }
+        
+        return sum;
+    }
+};
