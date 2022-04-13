@@ -1,0 +1,20 @@
+//dp by n^2,use the dp[i] to update the dp[i+1] to dp[i+nums[i]]
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int length=nums.size();
+        if(length==1) return 0;
+        else{
+        int dp[length+1001]; // in case of out of index range 
+        dp[1]=0;
+        for (int i=2;i<length+1001;i++)
+            dp[i]=1e5;
+        for (int i=1;i<length+1;i++){
+            for(int j=1;j<=nums[i-1];j++)
+                dp[i+j]=min(dp[i+j],dp[i]+1);
+            
+        }
+        return dp[length];
+        }
+    }
+};
